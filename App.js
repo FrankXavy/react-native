@@ -1,8 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View, Button, TouchableHighlight, Pressable } from 'react-native';
 import icon from './assets/icon.png';
+import { useEffect, useState } from 'react';
+import { getPersonajes } from './lib/rickyMorty';
 
 export default function App() {
+
+  const [personales, setPersonajes] = useState([]);
+
+  useEffect(() => {
+      console.log("Fetching latest games...");
+      getPersonajes().then((data) => {
+        setPersonajes(data);
+        console.log("personajes:", data);
+      });
+    }, []);
+    
+
+  /*useEffect(() => {
+    getLatestGames().then((data) => {
+      setGames(data);
+      console.log(data);
+    }).catch((error) => {
+      console.error("Error fetching latest games:", error);
+    });
+  }, []);*/
+   
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -40,4 +63,4 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 20,
   }
-});
+})
