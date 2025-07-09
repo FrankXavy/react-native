@@ -1,0 +1,13 @@
+{
+    "eslint.useFlatConfig": true,
+    "eslint.useESLintClass": true,
+    "eslint.options": {
+        
+    },
+    "editor.formatOnSave": true,
+    "eslint.format.enable": true,
+    "eslint.run": "onSave",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.ts": "always"
+    }
+}
