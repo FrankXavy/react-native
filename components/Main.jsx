@@ -2,37 +2,28 @@ import { Image, StyleSheet, Text, View,   } from 'react-native';
 import { useEffect, useState } from 'react';
 import { getPersonajes } from '../lib/rickyMorty';
 import { ScrollView } from 'react-native-web';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { CharacterCard } from './CharacterCard';
 
 
 export function Main() {
 
   const [personajes, setPersonajes] = useState([]);
-  const insets = useSafeAreaInsets();
-
+  
   useEffect(() => {
-      console.log("Fetching latest games...");
       getPersonajes().then((data) => {
         setPersonajes(data);
-        console.log("personajes:", data);
       });
     }, []);
 
    
   return (
-    <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+    <>
         <ScrollView>
         {personajes.map((character) => (
-          <View key={character.id} style={styles.card}>
-            <Image source={{ uri: character.image }} style={styles.image} />
-            <Text style={styles.title}>{character.name}</Text>
-            <Text style={styles.species}>{character.species}</Text>
-            <Text style={styles.status}>{character.status}</Text>
-            <Text style={styles.gender}>{character.gender}</Text>
-          </View>
+          <CharacterCard key={character.id} character={character} />
         ))}
       </ScrollView>
-    </View>
+    </>
   );
 }
 
