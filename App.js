@@ -1,28 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View, Button, TouchableHighlight, Pressable } from 'react-native';
 import icon from './assets/icon.png';
+import { useEffect, useState } from 'react';
+import { getPersonajes } from './lib/rickyMorty';
 
 export default function App() {
+
+  const [personajes, setPersonajes] = useState([]);
+
+  useEffect(() => {
+      console.log("Fetching latest games...");
+      getPersonajes().then((data) => {
+        setPersonajes(data);
+        console.log("personajes:", data);
+      });
+    }, []);
+
+   
   return (
     <View style={styles.container}>
-      <StatusBar style="light" />
-      <Image style={styles.image} source={{uri: "https://www.metacritic.com/a/img/catalog/provider/6/3/6-1-4763-13.jpg"}} />
-      <Text>Tenemos aqui la app!</Text>
-      <Button
-        title="Click me!"
-        onPress={() => alert('Button clicked!')}
-        color={'#841584'}
-        />
-      <TouchableHighlight
-  onPress={() => alert('Touchable Highlight clicked!')}
-        style={{ backgroundColor: '#841584', padding: 10, borderRadius: 5, marginTop: 20 }}
-      
-        underlayColor="#DDDDDD">
-        <Text style={{ color: '#000' }}>Touchable Highlight</Text>
-      </TouchableHighlight>
-      <Pressable onPress={() => alert('Pressable clicked!')}>
-        <Text style={{ color: '#fff', padding: 10, backgroundColor: '#841584', borderRadius: 5, marginTop: 20 }}>Pressable</Text>
-      </Pressable>
+      <StatusBar style="auto" />
+      {personajes.map((character) => (
+        <View key={character.id} style={styles.card}>
+          <Image source={{ uri: character.image }} style={styles.image} />
+          <Text style={styles.title}>{character.name}</Text>
+          <Text style={styles.species}>{character.species}</Text>
+          <Text style={styles.status}>{character.status}</Text>
+          <Text style={styles.gender}>{character.gender}</Text>
+        </View>
+      ))}
     </View>
   );
 }
@@ -35,9 +41,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    width: 215,
-    height: 294,
+    width: 107,
+    height: 147,
     borderRadius: 10,
-    marginBottom: 20,
-  }
-});
+    
+  },
+  card: {
+    backgroundColor: '#333',
+    padding: 20,
+    borderRadius: 10,
+    marginBottom: 10,
+    width: '90%',
+    alignItems: 'center',
+  },
+  title:{
+    fontSize:20,
+    fontWeight:'bold',
+    marginBottom:10,
+    color:'#fff',
+  },
+  species: {
+    fontSize: 16,
+    color: '#fff',
+  },
+  status: {
+    fontSize: 16,
+    color: '#33caff', 
+  },
+  gender: {
+    fontSize: 16,
+    color: '#fff',
+    fontWeight: 'bold',
+  }, 
+})
