@@ -1,7 +1,7 @@
-import { Image, StyleSheet, Text, View,   } from 'react-native';
+import { StyleSheet, } from 'react-native';
 import { useEffect, useState } from 'react';
 import { getPersonajes } from '../lib/rickyMorty';
-import { ScrollView } from 'react-native-web';
+import { ActivityIndicator, ScrollView, View } from 'react-native-web';
 import { CharacterCard } from './CharacterCard';
 
 
@@ -17,13 +17,17 @@ export function Main() {
 
    
   return (
-    <>
-        <ScrollView>
-        {personajes.map((character) => (
-          <CharacterCard key={character.id} character={character} />
-        ))}
-      </ScrollView>
-    </>
+    <View>
+       { personajes.length === 0 ? (
+          <ActivityIndicator size={'large'}/>
+        ) : (
+            <ScrollView>
+                {personajes.map((character) => (
+                    <CharacterCard key={character.id} character={character} />
+                ))}
+            </ScrollView>
+        )}
+    </View>
   );
 }
 
