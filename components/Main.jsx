@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { getPersonajes } from '../lib/rickyMorty';
 import { ActivityIndicator } from 'react-native-web';
 import { AnimatedCharacterCard } from './CharacterCard';
+import { Link } from 'expo-router';
 
 
 export function Main() {
@@ -18,6 +19,9 @@ export function Main() {
    
   return (
     <>
+      <Link href="/about" style={{ margin: 20, color: '#fff', fontSize: 18 }}>
+        About 
+      </Link>
        { personajes.length === 0 ? (
           <ActivityIndicator size={'large'}/>
         ) : (

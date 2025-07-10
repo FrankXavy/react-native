@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+// Elimina este archivo o renómbralo a App.old.js
 import { StyleSheet, View  } from 'react-native';
 import { Main } from './components/Main';
 import LogoReact from './components/LogoReact';
