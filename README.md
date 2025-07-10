@@ -93,3 +93,8 @@ Utiliza funciones asíncronas para manejar peticiones HTTP.
 Procesa y transforma los datos para que sean fáciles de usar en tu app.
 Exporta las funciones para que puedan ser usadas en otros componentes.
 ¿Te gustaría que te explique algún fragmento específico con más detalle?
+
+SVG to Component:
+https://react-svgr.com/playground/?native=true
+
+https://www.svgrepo.com/svg/440507/morty
