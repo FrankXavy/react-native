@@ -1,8 +1,8 @@
-import { StyleSheet, } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
 import { getPersonajes } from '../lib/rickyMorty';
-import { ActivityIndicator, ScrollView, View } from 'react-native-web';
-import { CharacterCard } from './CharacterCard';
+import { ActivityIndicator } from 'react-native-web';
+import { AnimatedCharacterCard } from './CharacterCard';
 
 
 export function Main() {
@@ -17,17 +17,20 @@ export function Main() {
 
    
   return (
-    <View>
+    <>
        { personajes.length === 0 ? (
           <ActivityIndicator size={'large'}/>
         ) : (
-            <ScrollView>
-                {personajes.map((character) => (
-                    <CharacterCard key={character.id} character={character} />
-                ))}
-            </ScrollView>
+            <FlatList
+                data={personajes}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item, index }) => (
+                    <AnimatedCharacterCard character={item} index={index}/>      
+                )}
+                >
+            </FlatList>
         )}
-    </View>
+    </>
   );
 }
 

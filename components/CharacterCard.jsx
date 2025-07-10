@@ -1,4 +1,5 @@
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { useEffect, useRef } from 'react';
+import { View, StyleSheet, Text, Image, Animated } from 'react-native';
 
 export function CharacterCard({ character }) {
   // This component receives a character object as a prop and displays its details
@@ -12,6 +13,32 @@ export function CharacterCard({ character }) {
     </View>
   );
 }
+
+// This component is similar to CharacterCard but can be used for animations
+export function AnimatedCharacterCard({ character, index }) {
+ const opacity = useRef(new Animated.Value(0)).current;
+  const translateY = useRef(new Animated.Value(50)).current;
+
+  useEffect(() => {
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 500,
+      delay: index * 200,
+      useNativeDriver: true,
+    }).start();
+
+    
+  }, [index, opacity]);
+
+  return (
+    <Animated.View style={{ opacity }}>
+      <CharacterCard character={character} />
+    </Animated.View>
+  );
+      
+}
+  
+
 
 const styles = StyleSheet.create({
   image: {

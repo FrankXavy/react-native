@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View  } from 'react-native';
 import { Main } from './components/Main';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import LogoReact from './components/LogoReact';
 
 
 export default function App() {
@@ -10,7 +10,9 @@ export default function App() {
   return (
     
       <View style={styles.container}>
+        
         <StatusBar style="auto" />
+        <LogoReact style={styles.logo}/>
         <Main />
       </View>
     
@@ -24,4 +26,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  logo: {
+    backgroundColor: '#333',
+    padding: 20,
+  }
 })
